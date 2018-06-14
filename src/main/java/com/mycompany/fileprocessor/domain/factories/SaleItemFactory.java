@@ -1,6 +1,8 @@
 package com.mycompany.fileprocessor.domain.factories;
 
 import com.mycompany.fileprocessor.domain.entity.Entity;
+import com.mycompany.fileprocessor.domain.entity.SaleItem;
+import java.math.BigDecimal;
 
 public class SaleItemFactory implements EntityFactory {
 
@@ -9,7 +11,13 @@ public class SaleItemFactory implements EntityFactory {
 
     @Override
     public Entity create(String registry) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] splitedRegistries = registry.split("-");
+        return new SaleItem(
+                new Long(splitedRegistries[0]),
+                new Long(splitedRegistries[1]),
+                new BigDecimal(splitedRegistries[2])
+        );
+        
     }
     
     
