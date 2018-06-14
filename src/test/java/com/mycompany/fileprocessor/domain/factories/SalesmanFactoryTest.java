@@ -5,8 +5,8 @@
  */
 package com.mycompany.fileprocessor.domain.factories;
 
-import com.mycompany.fileprocessor.domain.entity.Entity;
 import com.mycompany.fileprocessor.domain.entity.Salesman;
+import java.math.BigDecimal;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,8 +42,8 @@ public class SalesmanFactoryTest {
     @Test
     public void testCreateSalesmanByString(){
         //001ç1234567891234çPedroç50000
-        Salesman expectedSalesman = new Salesman("1234567891234", "Pedro",50000f);
-        String expectedSalesmanRegistry = String.format("001ç%sç%sç%f",
+        Salesman expectedSalesman = new Salesman("1234567891234", "Pedro",new BigDecimal(5000));
+        String expectedSalesmanRegistry = String.format("001ç%sç%sç%s",
                 expectedSalesman.getCpf(),
                 expectedSalesman.getName(),
                 expectedSalesman.getSalary());

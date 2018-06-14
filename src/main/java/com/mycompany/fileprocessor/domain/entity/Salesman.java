@@ -1,12 +1,14 @@
 package com.mycompany.fileprocessor.domain.entity;
 
+import java.math.BigDecimal;
+
 public class Salesman extends Entity {
 
     private String cpf;
     private String name;
-    private Float salary;
+    private BigDecimal salary;
 
-    public Salesman(String cpf, String name, Float salary) {
+    public Salesman(String cpf, String name, BigDecimal salary) {
         this.cpf = cpf;
         this.name = name;
         this.salary = salary;
@@ -28,11 +30,11 @@ public class Salesman extends Entity {
         this.name = name;
     }
 
-    public Float getSalary() {
+    public BigDecimal getSalary() {
         return salary;
     }
 
-    public void setSalary(Float salary) {
+    public void setSalary(BigDecimal salary) {
         this.salary = salary;
     }
 
