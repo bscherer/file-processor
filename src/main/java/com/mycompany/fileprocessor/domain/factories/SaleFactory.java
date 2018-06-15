@@ -10,8 +10,8 @@ import java.util.List;
 public class SaleFactory implements EntityFactory {
 
     @Override
-    public Entity create(String registry) {
-        String[] splitedRegistries = registry.split("ç");
+    public Entity create(String register) {
+        String[] splitedRegistries = register.split("ç");
         Sale sale = new Sale(
                 new Long(splitedRegistries[1]),
                 createSaleItems(splitedRegistries[2]),
@@ -20,9 +20,9 @@ public class SaleFactory implements EntityFactory {
         return sale;
     }
     
-    private List<SaleItem> createSaleItems(String itemsRegistry){
+    private List<SaleItem> createSaleItems(String itemsRegister){
         List<SaleItem> saleItems = new ArrayList();
-        List<String> items = Arrays.asList(itemsRegistry.replace("[", "").replace("]", "").split(","));
+        List<String> items = Arrays.asList(itemsRegister.replace("[", "").replace("]", "").split(","));
         EntityFactory saleItemsFactory = new SaleItemFactory();
         for(String item : items) {
             saleItems.add((SaleItem) saleItemsFactory.create(item));

@@ -7,9 +7,9 @@ public interface EntityFactory {
     
     /**
      *
-     * @param registry
+     * @param register
      * @return
      */
-    abstract Entity create(String registry);
+    abstract Entity create(String register);
     
 }

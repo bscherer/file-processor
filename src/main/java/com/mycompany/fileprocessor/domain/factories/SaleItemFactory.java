@@ -10,8 +10,8 @@ public class SaleItemFactory implements EntityFactory {
     }
 
     @Override
-    public Entity create(String registry) {
-        String[] splitedRegistries = registry.split("-");
+    public Entity create(String register) {
+        String[] splitedRegistries = register.split("-");
         return new SaleItem(
                 new Long(splitedRegistries[0]),
                 new Long(splitedRegistries[1]),

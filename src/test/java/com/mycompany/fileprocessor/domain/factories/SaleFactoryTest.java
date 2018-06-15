@@ -33,7 +33,7 @@ public class SaleFactoryTest {
     }
 
     @Test
-    public void testCreateSaleByRegistry() {
+    public void testCreateSaleByRegister() {
         //003çSale IDç[Item ID-Item Quantity-Item Price]çSalesman name
         //003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro
 
@@ -41,9 +41,9 @@ public class SaleFactoryTest {
         expectedSale.addItens(new SaleItem(1L, 10L, new BigDecimal(100)));
         expectedSale.addItens(new SaleItem(2L, 30L, new BigDecimal(2.50)));
         expectedSale.addItens(new SaleItem(3L, 40L, new BigDecimal(3.10)));
-        String expectedSaleRegistry = "003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro";
+        String expectedSaleRegister = "003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro";
         EntityFactory factory = new SaleFactory();
-        Sale sale = (Sale) factory.create(expectedSaleRegistry);
+        Sale sale = (Sale) factory.create(expectedSaleRegister);
         assertEquals(sale.getId(), expectedSale.getId());
         assertEquals(sale.getSalesmanName(), expectedSale.getSalesmanName());
 

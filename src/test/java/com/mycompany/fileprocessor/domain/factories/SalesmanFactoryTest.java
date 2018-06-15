@@ -43,13 +43,13 @@ public class SalesmanFactoryTest {
     public void testCreateSalesmanByString(){
         //001ç1234567891234çPedroç50000
         Salesman expectedSalesman = new Salesman("1234567891234", "Pedro",new BigDecimal(5000));
-        String expectedSalesmanRegistry = String.format("001ç%sç%sç%s",
+        String expectedSalesmanRegister = String.format("001ç%sç%sç%s",
                 expectedSalesman.getCpf(),
                 expectedSalesman.getName(),
                 expectedSalesman.getSalary());
         
         EntityFactory factory = new SalesmanFactory();
-        Salesman salesman = (Salesman) factory.create(expectedSalesmanRegistry);
+        Salesman salesman = (Salesman) factory.create(expectedSalesmanRegister);
         assertEquals(salesman.getCpf(), expectedSalesman.getCpf());
         assertEquals(salesman.getName(), expectedSalesman.getName());
         assertEquals(salesman.getSalary(), expectedSalesman.getSalary());
