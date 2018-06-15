@@ -6,12 +6,12 @@ public class SaleItem extends Entity {
     
     private Long id;
     private Long quantity;
-    private BigDecimal price;
+    private BigDecimal unitPrice;
 
-    public SaleItem(Long id, Long quantity, BigDecimal price) {
+    public SaleItem(Long id, Long quantity, BigDecimal unitPrice) {
         this.id = id;
         this.quantity = quantity;
-        this.price = price;
+        this.unitPrice = unitPrice;
     }
 
     public Long getId() {
@@ -30,12 +30,16 @@ public class SaleItem extends Entity {
         this.quantity = quantity;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+    
+    public BigDecimal getPrice(){
+        return unitPrice.multiply(new BigDecimal(quantity));
     }
     
     

@@ -38,12 +38,12 @@ public class SaleItemFactoryTest {
         String expectedSaleItemRegister = String.format("%s-%s-%s",
                 expectedSaleItem.getId().toString(),
                 expectedSaleItem.getQuantity().toString(),
-                expectedSaleItem.getPrice().toString());
+                expectedSaleItem.getUnitPrice().toString());
         EntityFactory factory = new SaleItemFactory();
         SaleItem saleItem = (SaleItem)factory.create(expectedSaleItemRegister);
         assertEquals(saleItem.getId(), expectedSaleItem.getId());
         assertEquals(saleItem.getQuantity(), expectedSaleItem.getQuantity());
-        assertEquals(saleItem.getPrice(), expectedSaleItem.getPrice());
+        assertEquals(saleItem.getUnitPrice(), expectedSaleItem.getUnitPrice());
         
     }
 }

@@ -5,6 +5,11 @@ import com.mycompany.fileprocessor.domain.entity.Entity;
 
 public interface EntityFactory {
     
-    public Entity create(String registry);
+    /**
+     *
+     * @param registry
+     * @return
+     */
+    abstract Entity create(String registry);
     
 }
