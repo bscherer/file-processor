@@ -84,6 +84,15 @@ public class RegisterService {
         
         return worstSale.getSalesmanName();
     }
+    
+    public String getReportResult(){
+        return String.format("%dç%dç%02dç%s", 
+                getClients().size(),
+                getSalesmen().size(),
+                getMostExpensiveSaleId(),
+                getWorstSalesman()
+                );
+    }
 
     private EntityFactory getCorrespondentFactory(String line) {
         String type = line.substring(0, 3);

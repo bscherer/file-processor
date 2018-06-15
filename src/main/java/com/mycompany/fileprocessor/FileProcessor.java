@@ -1,20 +1,70 @@
 package com.mycompany.fileprocessor;
 
 import com.mycompany.fileprocessor.domain.service.RegisterService;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
+import java.util.List;
 
 public class FileProcessor {
-    
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws IOException, InterruptedException {
         RegisterService service = new RegisterService();
-        
-        service.register("001ç1234567891234çPedroç50000");
-        service.register("001ç3245678865434çPauloç40000.99");
-        service.register("002ç2345675434544345çJose da SilvaçRural");
-        service.register("002ç2345675433444345çEduardo PereiraçRural");
-        service.register("003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro");
-        service.register("003ç08ç[1-34-10,2-33-1.50,3-40-0.10]çPaulo");
-        
-        service.getWorstSalesman();
+        WatchService watchService
+                = FileSystems.getDefault().newWatchService();
+
+        Path inputPath = Paths.get(
+                System.getProperty("user.home")
+                        .concat(File.separator)
+                        .concat("data")
+                        .concat(File.separator)
+                        .concat("in"));
+        Path outputPath = Paths.get(
+                System.getProperty("user.home")
+                        .concat(File.separator)
+                        .concat("data")
+                        .concat(File.separator)
+                        .concat("out"));
+
+        inputPath.register(
+                watchService,
+                StandardWatchEventKinds.ENTRY_CREATE
+        );
+
+        WatchKey key;
+        while ((key = watchService.take()) != null) {
+            for (WatchEvent<?> event : key.pollEvents()) {
+
+                String filename = event.context().toString();
+
+                if (".dat".equalsIgnoreCase(filename.substring(filename.length() - 4))) {
+
+                    Path inputFilePath = inputPath.resolve((Path) event.context());
+                    Path outputFilePath = outputPath.resolve(filename.replace(".dat", ".done.dat"));
+
+                    System.out.println("Lendo arquivo de ".concat(inputFilePath.toString()));
+                    List<String> lines = Files.readAllLines(inputFilePath);
+
+                    System.out.println("processando...");
+                    service.registerAll(lines);
+                    
+                    try (BufferedWriter writer = Files.newBufferedWriter(outputFilePath)) {
+                        writer.write(service.getReportResult());
+                        System.out.println("Resultado do processamento em ".concat(outputFilePath.toString()));
+                    }
+                }
+            }
+            key.reset();
+        }
+
     }
-    
+
 }
